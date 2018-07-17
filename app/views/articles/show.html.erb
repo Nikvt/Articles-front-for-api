@@ -1,2 +1,30 @@
-<h1>Articles#show</h1>
-<p>Find me in app/views/articles/show.html.erb</p>
+<div class="grid-container top_10 width_index">
+  <div class="callout">
+    <div class="grid-x grid-margin-x">
+      <div class="cell offset-4 centered">
+        <h4><strong><%= @articleJS['attributes']['title'] %></strong></h4>
+      </div>
+      <div class="cell">
+        <br>
+        <p><%= @articleJS['attributes']['content'] %></p>
+      </div>
+    </div>
+  </div>
+  <div class="callout">
+    <div class="grid-x grid-margin-x">
+      <div class="cell">
+        <strong>Comment section</strong>
+      </div>
+      <% @commentsJS.each do |comment| %>
+        <div class="cell">
+          <hr/>
+          Author: <span class="underline"><%= comment['attributes']['user-name'] %></span>
+        </div>
+        <div class="cell">
+          <br>
+          <%= comment['attributes']['content'] %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
