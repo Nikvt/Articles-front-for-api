@@ -1,0 +1,16 @@
+<div class="grid-container top_10 width_index" >
+  <% @articlesJS.each do |article| %>
+    <div class="callout">
+      <div class="grid-x grid-margin-x">
+        <div class="cell offset-4 centered">
+          <h4><strong><%= link_to article['attributes']['title'], article_path(article['id']) %></strong></h4>
+        </div>
+        <div class="cell">
+          <br>
+          <p><%= article['attributes']['content'][0...100] %></p>
+          <%= link_to 'SHOW MORE', article_path(article['id']) %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

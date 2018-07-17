@@ -6,6 +6,7 @@ ruby '2.5.0'
 # front, added
 gem 'foundation-rails'
 gem 'autoprefixer-rails'
+gem 'foundation-icons-sass-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
