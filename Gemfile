@@ -7,6 +7,8 @@ ruby '2.5.0'
 gem 'foundation-rails'
 gem 'autoprefixer-rails'
 gem 'foundation-icons-sass-rails'
+gem 'jquery-ui-rails'
+gem 'jquery-rails'
 
 gem 'pg'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

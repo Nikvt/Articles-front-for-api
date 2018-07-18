@@ -7,8 +7,13 @@
         </div>
         <div class="cell">
           <br>
-          <p><%= article['attributes']['content'][0...100] %></p>
-          <%= link_to 'SHOW MORE', article_path(article['id']) %>
+          <p>
+            <%= article['attributes']['content'][0...100] %>
+          <span class="read-more-content" id="art-id-<%= article['id'] %>" data-toggler data-animate="fade-in fade-out">
+            <%= article['attributes']['content'][100..-1] %>
+          </span>
+          </p>
+          <button data-toggle="art-id-<%= article['id'] %>" href="#">SHOW MORE <i class="fa fa-plus"></i></button>
         </div>
       </div>
     </div>

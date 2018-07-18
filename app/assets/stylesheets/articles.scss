@@ -18,3 +18,16 @@
 .underline {
   text-decoration: underline;
 }
+
+.read-more-content,
+.read-more {
+  display: none;
+  margin-top: 1rem;
+
+  &.expanded {
+    .read-more {
+      display: block;
+    }
+  }
+}
+
