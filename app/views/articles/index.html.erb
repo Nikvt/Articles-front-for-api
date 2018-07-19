@@ -1,14 +1,13 @@
-<div class="grid-container top_10 width_index" >
+<div class="grid-container top_10 width_700" >
   <% @articlesJS.each do |article| %>
     <div class="callout">
-      <div class="grid-x grid-margin-x">
-        <div class="cell offset-4 centered">
+      <div class="grid-x">
+        <div class="cell offset-4">
           <h4><strong><%= link_to article['attributes']['title'], article_path(article['id']) %></strong></h4>
         </div>
         <div class="cell">
           <br>
           <p>
-            COUCOU
             <%= article['attributes']['content'][0...100] %>
           <span class="read-more-content" id="art-id-<%= article['id'] %>" data-toggler data-animate="fade-in fade-out">
             <%= article['attributes']['content'][100..-1] %>

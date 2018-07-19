@@ -2,6 +2,12 @@
   <div class="top-bar-left">
     <ul class="dropdown menu align-middle" data-dropdown-menu>
       <li class="menu-text"><%= link_to 'Articles', root_path %></li>
+      <% if session[:api_token] %>
+        <li><%= link_to "Write a new article", new_article_path %></li>
+        <li><%= link_to "Logout", logout_path %></li>
+      <% else %>
+        <li><a href="https://github.com/login/oauth/authorize?scope=user&client_id=2b1544a22d8519229309">Login with GitHub</a></li>
+      <% end %>
     </ul>
   </div>
   <div class="top-bar-right">

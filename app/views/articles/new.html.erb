@@ -1,0 +1,17 @@
+<%= simple_form_for :article, url: articles_path do |f| %>
+  <div class="grid-container top_10">
+    <div class="grid-y width_700 test">
+      <div  class="cell">
+        <%= f.label :title %>
+        <%= f.text_field :title, input_html: { value: nil } %>
+      </div>
+      <div  class="cell">
+        <%= f.label :content %>
+        <%= f.text_area :content, input_html: { value: nil }, rows: 10 %>
+      </div>
+      <div class="cell">
+        <%= f.submit 'Submit', class: 'button' %>
+      </div>
+    </div>
+  </div>
+<% end %>
