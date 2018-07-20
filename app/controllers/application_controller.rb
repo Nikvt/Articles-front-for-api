@@ -55,8 +55,8 @@ class ApplicationController < ActionController::Base
   end
 
   def create_session(data)
-    # {"data"=>{"id"=>"6", "type"=>"access-tokens", "attributes"=>{"token"=>"fad2ff88ea1741b9d4aa"}}}
-    session[:user_id] = data['data']['id']
+    # {"data"=>{"id"=>"10", "type"=>"access-tokens", "attributes"=>{"token"=>"1d271869785a5ca5e54d"}, "relationships"=>{"user"=>{"data"=>{"id"=>"6", "type"=>"users"}}}}}
+    session[:user_id] = data['data']['relationships']['user']['data']['id']
     session[:api_token] = data['data']['attributes']['token']
   end
 
