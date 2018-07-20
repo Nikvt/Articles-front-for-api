@@ -8,6 +8,14 @@
         <br>
         <p><%= @articleJS['attributes']['content'] %></p>
       </div>
+      <% if session[:api_token] && session[:user_id] == @articleJS['relationships']['user']['data']['id'] %>
+        <div class="cell">
+          <div class="small button-group">
+            <%= link_to 'Edit this article', edit_article_path(@articleJS['id']), class: 'button' %>
+            <%= link_to 'Remove this article', article_path(@articleJS['id']), method: :delete, class: ' alert button' %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
   <div class="callout">
@@ -25,6 +33,18 @@
           <%= comment['attributes']['content'] %>
         </div>
       <% end %>
+      <div class="cell">
+        <hr/>
+        <% if session[:api_token] %>
+          <hr/>
+          <%= simple_form_for :comment, url: add_comment_path(@articleJS['id']) do |f| %>
+            <%= f.text_area :content, rows: 5 %>
+            <%= f.submit 'Add comment', class: 'button' %>
+          <% end %>
+        <% else %>
+          Login to add comments
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

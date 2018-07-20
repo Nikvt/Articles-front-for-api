@@ -1,13 +1,13 @@
-<%= simple_form_for :article, url: articles_path do |f| %>
+<%= simple_form_for :article, url: article_path(@articleJS['id']), method: :put do |f| %>
   <div class="grid-container top_10">
     <div class="grid-y width_700 test">
       <div  class="cell">
         <%= f.label :title %>
-        <%= f.text_field :title %>
+        <%= f.text_field :title, value: @articleJS['attributes']['title'] %>
       </div>
       <div  class="cell">
         <%= f.label :content %>
-        <%= f.text_area :content, rows: 10 %>
+        <%= f.text_area :content, value: @articleJS['attributes']['content'], rows: 10 %>
       </div>
       <div class="cell">
         <%= f.submit 'Submit', class: 'button' %>

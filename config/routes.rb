@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get 'logout', to: 'articles#logout'
 
-  resources :articles do
-    resources :comments, only: [:index, :create]
-  end
+  post 'articles/:id/add_comment', to: 'articles#add_comment', as: 'add_comment'
+
+  resources :articles
 end

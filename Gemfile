@@ -10,6 +10,7 @@ gem 'foundation-icons-sass-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-rails'
 gem 'simple_form'
+gem 'figaro'
 
 gem 'pg'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

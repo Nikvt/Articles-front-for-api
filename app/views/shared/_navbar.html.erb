@@ -6,7 +6,7 @@
         <li><%= link_to "Write a new article", new_article_path %></li>
         <li><%= link_to "Logout", logout_path %></li>
       <% else %>
-        <li><a href="https://github.com/login/oauth/authorize?scope=user&client_id=2b1544a22d8519229309">Login with GitHub</a></li>
+        <li><a href="https://github.com/login/oauth/authorize?scope=user&client_id=<%= ENV['CLIENT_ID'] %>">Login with GitHub</a></li>
       <% end %>
     </ul>
   </div>
