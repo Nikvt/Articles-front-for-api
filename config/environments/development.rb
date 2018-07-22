@@ -60,4 +60,15 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   ENV['URL'] = 'http://localhost:3001/'
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      :user_name => '019797c5ced39d',
+      :password => '3c60e0481ce6b8',
+      :address => 'smtp.mailtrap.io',
+      :domain => 'smtp.mailtrap.io',
+      :port => '2525',
+      :authentication => :cram_md5
+  }
+  config.action_mailer.default_url_options = { host: "localhost:3000" }
 end

@@ -1,0 +1,10 @@
+<h4> Hello <%= @article['author']['name'] %> !</h4><br/>
+
+Someone posted a new comment for your article "<%= @article['title'] %>"!<br/><br/>
+
+<%= @comment['author']['name'] %>:<br/>
+<%= @comment['content'] %>
+
+Have a great day!<br/>
+<hr/>
+<%= link_to "Article page", article_path(@article['id']) %>

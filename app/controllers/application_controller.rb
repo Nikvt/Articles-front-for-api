@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   def call_api_post_item(url, item, api_token)
     uri = URI(url)
     http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
+    # http.use_ssl = true
     req = Net::HTTP::Post.new(uri.path, {'Content-Type' => 'application/json', 'Authorization' => api_token})
     req.body = { 'data' => { 'attributes' => item } }.to_json
     res = http.request(req)
@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   def call_api_put_item(url, item, api_token)
     uri = URI(url)
     http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
+    # http.use_ssl = true
     req = Net::HTTP::Put.new(uri.path, {'Content-Type' => 'application/json', 'Authorization' => api_token})
     req.body = { 'data' => { 'attributes' => item } }.to_json
     res = http.request(req)
@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   def call_api_delete(url, api_token)
     uri = URI(url)
     http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
+    # http.use_ssl = true
     req = Net::HTTP::Delete.new(uri.path, {'Authorization' => api_token})
     http.request(req)
   end
@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
   def call_api_auth(url, git_token)
     uri = URI(url)
     http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
+    # http.use_ssl = true
     req = Net::HTTP::Post.new(uri.path)
     req.set_form_data({"code" => git_token})
     res = http.request(req)
@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
   def call_api_logout(url, api_token)
     uri = URI(url)
     http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
+    # http.use_ssl = true
     req = Net::HTTP::Delete.new(uri.path, {'Authorization' => api_token})
     http.request(req)
   end
