@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :destroy]
+  before_action :set_article, only: [:show, :edit, :destroy, :add_comment]
   before_action :get_comments, only: [:show]
 
   def index
@@ -25,7 +25,8 @@ class ArticlesController < ApplicationController
 
   def add_comment
     comment = comment_params
-    call_api_post_item(ENV['URL'] + 'articles/' + params[:id] + '/comments', comment, session[:api_token])
+    comment = call_api_post_item(ENV['URL'] + 'articles/' + params[:id] + '/comments', comment, session[:api_token])
+    MailsCommentCreation.call(comment: comment['data'], article: @articleJS)
     redirect_to article_path(params[:id])
   end
 
@@ -35,9 +36,9 @@ class ArticlesController < ApplicationController
   def update
     article = article_params
     article['slug'] = article['title'].gsub(/\s+/, '-')
-    article_id = call_api_put_item(ENV['URL'] + 'articles/' + params[:id], article, session[:api_token])
-    if article_id['data']['id']
-      redirect_to article_path(article_id['data']['id'])
+    article = call_api_put_item(ENV['URL'] + 'articles/' + params[:id], article, session[:api_token])
+    if article['data']['id']
+      redirect_to article_path(article['data']['id'])
     else
       render :new
     end
@@ -64,7 +65,6 @@ class ArticlesController < ApplicationController
 
   def set_article
     @articleJS = call_api_wo_auth(ENV['URL'] + 'articles/' + params[:id])
-    # {"id"=>"34", "type"=>"articles", "attributes"=>{"title"=>"asefwaefwfcx1", "content"=>"afsewfwfedf1", "slug"=>"asefwaefwfcx1", "from-today?"=>false}, "relationships"=>{"user"=>{"data"=>{"id"=>"6", "type"=>"users"}}}}
   end
 
   def get_comments
