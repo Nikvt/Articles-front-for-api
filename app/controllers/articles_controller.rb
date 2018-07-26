@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   before_action :get_comments, only: [:show]
 
   def index
-    @articlesJS = call_api_wo_auth(ENV['URL'] + 'articles/')
+    @articlesJS = calls.call(ENV['URL'] + 'articles/', 'get')['data']
   end
 
   def show
@@ -15,9 +15,9 @@ class ArticlesController < ApplicationController
   def create
     article = article_params
     article['slug'] = article['title'].gsub(/\s+/, '-')
-    article_id = call_api_post_item(ENV['URL'] + 'articles/', article, session[:api_token])
-    if article_id['data']['id']
-    redirect_to article_path(article_id['data']['id'])
+    article_id = calls.call(ENV['URL'] + 'articles/', 'post', session[:api_token], article)['data']['id']
+    if article_id
+    redirect_to article_path(article_id)
     else
       render :new
     end
@@ -25,7 +25,7 @@ class ArticlesController < ApplicationController
 
   def add_comment
     comment = comment_params
-    comment = call_api_post_item(ENV['URL'] + 'articles/' + params[:id] + '/comments', comment, session[:api_token])
+    comment = calls.call(ENV['URL'] + 'articles/' + params[:id] + '/comments', 'post', session[:api_token], comment)
     MailsCommentCreation.call(comment: comment['data'], article: @articleJS)
     redirect_to article_path(params[:id])
   end
@@ -36,27 +36,27 @@ class ArticlesController < ApplicationController
   def update
     article = article_params
     article['slug'] = article['title'].gsub(/\s+/, '-')
-    article = call_api_put_item(ENV['URL'] + 'articles/' + params[:id], article, session[:api_token])
-    if article['data']['id']
-      redirect_to article_path(article['data']['id'])
+    article = calls.call(ENV['URL'] + 'articles/' + params[:id], 'put', session[:api_token], article)['data']['id']
+    if article
+      redirect_to article_path(article)
     else
       render :new
     end
   end
 
   def destroy
-    call_api_delete(ENV['URL'] + 'articles/' + params[:id], session[:api_token])
+    calls.call(ENV['URL'] + 'articles/' + params[:id], 'delete', session[:api_token])
     redirect_to articles_path
   end
 
   def login
-    response = call_api_auth(ENV['URL'] + '/login', params[:code])
+    response = calls.call(ENV['URL'] + '/login', 'login', params[:code])
     create_session(response)
     redirect_to articles_path
   end
 
   def logout
-    call_api_logout(ENV['URL'] + '/logout', session[:api_token])
+    calls.call(ENV['URL'] + '/logout', 'delete', session[:api_token])
     close_session
     redirect_to articles_path
   end
@@ -64,11 +64,11 @@ class ArticlesController < ApplicationController
   private
 
   def set_article
-    @articleJS = call_api_wo_auth(ENV['URL'] + 'articles/' + params[:id])
+    @articleJS = calls.call(ENV['URL'] + 'articles/' + params[:id], 'get')['data']
   end
 
   def get_comments
-    @commentsJS = call_api_wo_auth(ENV['URL'] + 'articles/' + params[:id] + '/comments')
+    @commentsJS = calls.call(ENV['URL'] + 'articles/' + params[:id] + '/comments', 'get')['data']
   end
 
   def article_params
